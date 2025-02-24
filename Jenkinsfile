@@ -3,18 +3,18 @@ pipeline {
 
     options {
         buildDiscarder logRotator(
-            artifactDaysToKeepStr: '', 
-            artifactNumToKeepStr: '5', 
-            daysToKeepStr: '', 
+         
             numToKeepStr: '5'
         )
-        disableConcurrentBuilds()
+      
     }
 
     stages {
-        stage('Hello') {
+        stage('Scan') {
             steps {
-                echo "hello"
+                withSonarQuebEnv(installationName:'sql'){
+                    sh'./mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                }
             }
         }
     }
