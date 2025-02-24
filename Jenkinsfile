@@ -1,17 +1,14 @@
 pipeline {
-    agent any  // Remplacer 'linux' par 'any' si tu veux utiliser n'importe quel agent disponible
-
-    options {
-        buildDiscarder logRotator(
-            numToKeepStr: '5'
-        )
+    agent any
+    environment {
+        MAVEN_HOME = "/opt/apache-maven-3.6.3"
+        PATH = "$MAVEN_HOME/bin:$PATH"
     }
-
     stages {
         stage('Scan') {
             steps {
-                withSonarQubeEnv(installationName: 'sq1') {  // Correction du nom de la fonction
-                    sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'  // Espaces après sh pour une meilleure lisibilité
+                withSonarQubeEnv('sq1') {
+                    sh '$MAVEN_HOME/bin/mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
                 }
             }
         }
