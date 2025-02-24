@@ -11,7 +11,7 @@ pipeline {
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {  // Correction du nom de la fonction
-                    sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'  // Espaces après sh pour une meilleure lisibilité
+                    sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'  // Espaces après sh pour une meilleure lisibilité
                 }
             }
         }
