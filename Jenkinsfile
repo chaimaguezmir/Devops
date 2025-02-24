@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Scan') {
             steps {
-                withSonarQubeEnv(installationName: 'sql2') {  // Correction du nom de la fonction
+                withSonarQubeEnv(installationName: 'sql') {  // Correction du nom de la fonction
                     sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'  // Espaces après sh pour une meilleure lisibilité
                 }
             }
